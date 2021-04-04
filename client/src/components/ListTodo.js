@@ -14,6 +14,19 @@ import { FaTrash } from 'react-icons/fa';
 export default function ListTodo() {
   const [todos, setTodos] = useState([]);
 
+  const deleteTodo = async id => {
+    try {
+      const deleteTodo = await fetch(`http://localhost:5000/todos/${id}`, {
+        method: 'DELETE',
+      });
+      console.log(deleteTodo);
+      window.location = '/';
+    } catch (error) {
+      console.error(error);
+      process.exit(1);
+    }
+  };
+
   const getTodos = async () => {
     try {
       const response = await fetch('http://localhost:5000/todos');
@@ -46,7 +59,11 @@ export default function ListTodo() {
                 <Td>{todo.todo_name}</Td>
                 <Td>{todo.todo_desc}</Td>
                 <Td>
-                  <IconButton colorScheme="red" icon={<FaTrash />} />
+                  <IconButton
+                    onClick={() => deleteTodo(todo.todo_id)}
+                    colorScheme="red"
+                    icon={<FaTrash />}
+                  />
                 </Td>
               </Tr>
             ))}
