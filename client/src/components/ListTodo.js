@@ -10,6 +10,7 @@ import {
   Container,
 } from '@chakra-ui/react';
 import { FaTrash } from 'react-icons/fa';
+import EditTodo from './EditTodo';
 
 export default function ListTodo() {
   const [todos, setTodos] = useState([]);
@@ -50,7 +51,8 @@ export default function ListTodo() {
             <Tr>
               <Th>Name</Th>
               <Th>Description</Th>
-              <Th></Th>
+              <Th>Update</Th>
+              <Th>Delete</Th>
             </Tr>
           </Thead>
           <Tbody>
@@ -58,6 +60,9 @@ export default function ListTodo() {
               <Tr key={todo.todo_id}>
                 <Td>{todo.todo_name}</Td>
                 <Td>{todo.todo_desc}</Td>
+                <Td>
+                  <EditTodo todo={todo} />
+                </Td>
                 <Td>
                   <IconButton
                     onClick={() => deleteTodo(todo.todo_id)}
