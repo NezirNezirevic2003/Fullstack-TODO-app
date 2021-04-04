@@ -1,5 +1,15 @@
 import { Fragment, useEffect, useState } from 'react';
-import { Table, Thead, Tbody, Tr, Th, Td, Container } from '@chakra-ui/react';
+import {
+  IconButton,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  Container,
+} from '@chakra-ui/react';
+import { FaTrash } from 'react-icons/fa';
 
 export default function ListTodo() {
   const [todos, setTodos] = useState([]);
@@ -27,7 +37,7 @@ export default function ListTodo() {
             <Tr>
               <Th>Name</Th>
               <Th>Description</Th>
-              <Th>Delete</Th>
+              <Th></Th>
             </Tr>
           </Thead>
           <Tbody>
@@ -35,7 +45,9 @@ export default function ListTodo() {
               <Tr key={todo.todo_id}>
                 <Td>{todo.todo_name}</Td>
                 <Td>{todo.todo_desc}</Td>
-                <Td>Delete</Td>
+                <Td>
+                  <IconButton colorScheme="red" icon={<FaTrash />} />
+                </Td>
               </Tr>
             ))}
           </Tbody>
