@@ -1,6 +1,5 @@
 import React from 'react';
-import { WrapItem, Avatar, Wrap } from '@chakra-ui/react';
-import './Logo.svg';
+import { Avatar } from '@chakra-ui/react';
 
 export default function Logo() {
   return (
