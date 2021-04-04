@@ -23,6 +23,7 @@ export default function AddTodo() {
         body: JSON.stringify(body),
       });
       window.location = '/';
+      console.log(response);
     } catch (error) {
       console.error(error);
       process.exit(1);
