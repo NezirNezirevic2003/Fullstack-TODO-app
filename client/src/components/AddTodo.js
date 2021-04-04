@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import {
   Container,
   FormControl,
@@ -6,34 +6,62 @@ import {
   Input,
   FormHelperText,
   Textarea,
-  IconButton,
+  Button,
 } from '@chakra-ui/react';
-import { FaPlus } from 'react-icons/fa';
 
 export default function AddTodo() {
+  const [todo_name, setTodo_name] = useState('');
+  const [todo_desc, setTodo_desc] = useState('');
+
+  const onSubmit = async e => {
+    e.preventDefault();
+    try {
+      const body = { todo_name, todo_desc };
+      const response = await fetch('http://localhost:5000/todos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+      process.exit(1);
+    }
+  };
   return (
     <>
       <Container mt="20" maxW="container.sm">
-        <FormControl id="text">
-          <FormLabel>Todo name</FormLabel>
-          <Input type="text" />
-          <FormHelperText>Write the name of your todo</FormHelperText>
-        </FormControl>
-        <FormControl mt="3" id="text">
-          <FormLabel>Todo description</FormLabel>
-          <Textarea type="text" />
-          <FormHelperText>
-            Write the name of your todo description
-          </FormHelperText>
-        </FormControl>
-        <IconButton
-          mt="3"
-          width="full"
-          colorScheme="whatsapp"
-          aria-label="submit"
-          size="md"
-          icon={<FaPlus />}
-        />
+        <form onSubmit={onSubmit}>
+          <FormControl id="text">
+            <FormLabel>Todo name</FormLabel>
+            <Input
+              type="text"
+              value={todo_name}
+              onChange={e => setTodo_name(e.target.value)}
+            />
+            <FormHelperText>Write the name of your todo</FormHelperText>
+          </FormControl>
+          <FormControl mt="3" id="text">
+            <FormLabel>Todo description</FormLabel>
+            <Textarea
+              type="text"
+              value={todo_desc}
+              onChange={e => setTodo_desc(e.target.value)}
+            />
+            <FormHelperText>
+              Write the name of your todo description
+            </FormHelperText>
+          </FormControl>
+          <Button
+            size="md"
+            colorScheme="whatsapp"
+            width="full"
+            mt="3"
+            type="submit"
+          >
+            Submit
+          </Button>
+        </form>
       </Container>
     </>
   );
