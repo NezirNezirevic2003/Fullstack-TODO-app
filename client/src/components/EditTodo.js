@@ -2,6 +2,7 @@ import { Button, IconButton } from '@chakra-ui/button';
 import { FormControl, FormLabel } from '@chakra-ui/form-control';
 import { useDisclosure } from '@chakra-ui/hooks';
 import { Input } from '@chakra-ui/input';
+import { Container } from '@chakra-ui/layout';
 import {
   Modal,
   ModalBody,
@@ -50,53 +51,55 @@ export default function EditTodo({ todo }) {
       <IconButton
         icon={<FaPen />}
         color="white"
-        colorScheme="yellow"
+        colorScheme="blue"
         onClick={onOpen}
       />
+      <Container maxW="container.lg">
+        <Modal
+          initialFocusRef={initialRef}
+          finalFocusRef={finalRef}
+          isOpen={isOpen}
+          onClose={onClose}
+          size="md"
+        >
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader textAlign="center">Update todo</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody pb={6}>
+              <FormControl>
+                <FormLabel>Todo name</FormLabel>
+                <Input
+                  ref={initialRef}
+                  placeholder="todo name"
+                  value={todo_name}
+                  onChange={e => setTodo_name(e.target.value)}
+                />
+              </FormControl>
 
-      <Modal
-        initialFocusRef={initialRef}
-        finalFocusRef={finalRef}
-        isOpen={isOpen}
-        onClose={onClose}
-      >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader textAlign="center">Update todo</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody pb={6}>
-            <FormControl>
-              <FormLabel>Todo name</FormLabel>
-              <Input
-                ref={initialRef}
-                placeholder="todo name"
-                value={todo_name}
-                onChange={e => setTodo_name(e.target.value)}
-              />
-            </FormControl>
+              <FormControl mt={4}>
+                <FormLabel>Todo description</FormLabel>
+                <Textarea
+                  placeholder="Todo description"
+                  value={todo_desc}
+                  onChange={e => setTodo_desc(e.target.value)}
+                />
+              </FormControl>
+            </ModalBody>
 
-            <FormControl mt={4}>
-              <FormLabel>Todo description</FormLabel>
-              <Textarea
-                placeholder="Todo description"
-                value={todo_desc}
-                onChange={e => setTodo_desc(e.target.value)}
-              />
-            </FormControl>
-          </ModalBody>
-
-          <ModalFooter>
-            <Button
-              width="full"
-              colorScheme="whatsapp"
-              mr={3}
-              onClick={e => updateTodo(e)}
-            >
-              Update
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+            <ModalFooter>
+              <Button
+                width="full"
+                colorScheme="whatsapp"
+                mr={3}
+                onClick={e => updateTodo(e)}
+              >
+                Update
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      </Container>
     </Fragment>
   );
 }
