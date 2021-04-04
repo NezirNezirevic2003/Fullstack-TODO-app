@@ -50,17 +50,16 @@ app.get("/todos/:id", async (req, res) => {
 app.put("/todos/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { name } = req.body;
-    const { description } = req.body;
+    const { todo_name } = req.body;
+    const { todo_desc } = req.body;
     const updateTodo = await pool.query(
       "UPDATE todo SET todo_name = $1, todo_desc = $2 WHERE todo_id = $3",
-      [name, description, id]
+      [todo_name, todo_desc, id]
     );
 
-    res.json(updateTodo);
-  } catch (error) {
-    console.log(error);
-    process.exit(1);
+    res.json("Todo was updated!");
+  } catch (err) {
+    console.error(err.message);
   }
 });
 
