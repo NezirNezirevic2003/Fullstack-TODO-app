@@ -1,5 +1,4 @@
 import React from 'react';
-import Menu from './Menu';
 import { Container } from '@chakra-ui/react';
 import ColorModeSwitcher from '../ColorModeSwitcher';
 import Logo from './Logo';
@@ -9,7 +8,6 @@ export default function Header() {
     <>
       <Container mt="2" maxW="container.lg">
         <Logo />
-        <Menu />
         <ColorModeSwitcher />
       </Container>
     </>

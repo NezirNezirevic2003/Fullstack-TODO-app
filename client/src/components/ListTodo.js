@@ -49,21 +49,21 @@ export default function ListTodo() {
         <Table variant="simple">
           <Thead>
             <Tr>
-              <Th>Name</Th>
-              <Th>Description</Th>
-              <Th>Update</Th>
-              <Th>Delete</Th>
+              <Th textAlign="center">Name</Th>
+              <Th textAlign="center">Description</Th>
+              <Th textAlign="center">Update</Th>
+              <Th textAlign="center">Delete</Th>
             </Tr>
           </Thead>
           <Tbody>
             {todos.map(todo => (
               <Tr key={todo.todo_id}>
-                <Td>{todo.todo_name}</Td>
-                <Td>{todo.todo_desc}</Td>
-                <Td>
+                <Td textAlign="center">{todo.todo_name}</Td>
+                <Td textAlign="center">{todo.todo_desc}</Td>
+                <Td textAlign="center">
                   <EditTodo todo={todo} />
                 </Td>
-                <Td>
+                <Td textAlign="center">
                   <IconButton
                     onClick={() => deleteTodo(todo.todo_id)}
                     colorScheme="red"
